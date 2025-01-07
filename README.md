@@ -2,7 +2,7 @@
 
 ![LABO banner](images/banner.png)
 
-[![Follow on X.com](https://img.shields.io/badge/X.com-Follow-1DA1F2?style=for-the-badge&logo=x&logoColor=white)](https://x.com/okamotodk)
+[![Follow on X.com](https://img.shields.io/badge/X.com-Follow-1DA1F2?style=for-the-badge&logo=x&logoColor=white)](https://x.com/laboaitech)
 
 </div>
 
