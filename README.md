@@ -8,7 +8,7 @@
 
 ## 👾 What is LABO?
 
-### ⌚ LABO: Time Series Forecasting & Analysis Framework 📈
+### ⌚ LABO: LLM Agent Framework for Time Series Forecasting & Analysis 📈
 
 Constructing an LLM agent for time series foretasting holds significant practical value, such as stock market trend prediction, web public opinion analysis, etc. That's why we developed and open sourced ***LABO***, a time-series LLM framework by integrating pre-trained and fine-tuned LLMs with multi-domain agent-based systems.
 
