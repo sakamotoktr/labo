@@ -4,6 +4,10 @@
 
 [![Follow on X.com](https://img.shields.io/badge/X.com-Follow-1DA1F2?style=for-the-badge&logo=x&logoColor=white)](https://x.com/laboaitech)
 
+[![MIT](https://img.shields.io/badge/license-MIT-silver?style=flat-square)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/sakamotoktr/labo?style=flat-square&label=Release&color=limegreen)](https://github.com/sakamotoktr/labo/releases)
+[![GitHub](https://img.shields.io/github/stars/sakamotoktr/labo?style=flat-square&logo=github&label=Stars&color=gold)](https://github.com/sakamotoktr/labo)
+
 </div>
 
 ## 👾 What is LABO?
