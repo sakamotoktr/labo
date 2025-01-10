@@ -36,17 +36,23 @@ class TaskController:
         """Permanently eliminate specified record."""
         ctx = self._conn_factory()
         with ctx as persistence:
-            entry = DbRecord.read(db_session=persistence, identifier=entry_id)
-            entry.hard_delete(db_session=persistence)
-            return entry.to_pydantic()
+            if ctx.session_active():
+                entry = DbRecord.read(db_session=persistence, identifier=entry_id)
+                entry.hard_delete(db_session=persistence)
+                return entry.to_pydantic()
+            else:
+                return None
 
     @enforce_types
     def retrieve_entry(self, entry_id: str, operator: AuthEntity) -> DataModel:
         """Extract single record details."""
         ctx = self._conn_factory()
         with ctx as persistence:
-            result = DbRecord.read(db_session=persistence, identifier=entry_id)
-            return result.to_pydantic()
+            if ctx.session_active():
+                result = DbRecord.read(db_session=persistence, identifier=entry_id)
+                return result.to_pydantic()
+            else:
+                return None
 
     @enforce_types
     def persist_entry(self, payload: DataModel, operator: AuthEntity) -> DataModel:
