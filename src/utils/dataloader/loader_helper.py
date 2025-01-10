@@ -26,8 +26,8 @@ async def fetch_file_metadata(file_path: str) -> FileMetadata:
     file_type = mimetypes.guess_type(file_path)[0] or "unknown"
 
     return FileMetadata(
-        file_name=path.name,
-        file_path=str(path),
+        file_name=path.name.resolve(),
+        file_path=resolve_path(str(path)),
         file_type=file_type,
         file_size=stats.st_size,
         file_creation_date=datetime.fromtimestamp(stats.st_ctime),

@@ -52,7 +52,7 @@ class FolderConnector(AbstractDataConnector):
         files = []
         if self.directory:
             files = await fetch_filenames_in_directory(
-                self.directory, 
+                self.directory.async_expand(), 
                 self.is_recursive, 
                 self.file_extensions, 
                 ["*.png", "*.jpg", "*.jpeg"]
@@ -68,7 +68,7 @@ class FolderConnector(AbstractDataConnector):
                 identifier="",  # Generate ID as needed
                 source_identifier=source.identifier,
                 filename=meta.file_name,
-                filepath=meta.file_path,
+                filepath=meta.file_path.resolve(),
                 filetype=meta.file_type,
                 filesize=meta.file_size,
                 creation_date=meta.file_creation_date,
